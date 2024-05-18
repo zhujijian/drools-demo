@@ -13,6 +13,7 @@ function String hello1(String name) {
 
 rule "myrules.drl-1"
 lock-on-active
+ timer (5s 2s)
     when
         address : Address(postcode != null, postcode matches "([0-9]{5})")
         checkResult : AddressCheckResult();

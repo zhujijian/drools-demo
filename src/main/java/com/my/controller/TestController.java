@@ -19,8 +19,9 @@ import com.my.myfilter.AddressFilter;
 /**
  * 语法查考文档：
  * https://www.cnblogs.com/prpl/p/7906431.html
- * https://blog.csdn.net/dac55300424/article/details/12950701
+ * https://blog.csdn.net/qq_25409421/article/details/135815866
  * https://segmentfault.com/a/1190000021045375?sort=votes
+ * https://blog.csdn.net/shangjg03/article/details/135175841
  * */
 @RequestMapping("/test")
 @Controller
@@ -35,7 +36,7 @@ public class TestController {
 
 	@ResponseBody
 	@RequestMapping("/address")
-	public void test() {
+	public void test() throws InterruptedException {
 		Address address = new Address();
 		address.setPostcode("99425");
 		List<String> list = new ArrayList<String>();
@@ -43,12 +44,24 @@ public class TestController {
 		FactHandle f = kieSession.insert(address);
 		FactHandle f1 = kieSession.insert(result);
 		kieSession.setGlobal("myGlobalList", list);
+
+
+		new Thread(new Runnable() {
+			public void run() {
+				//启动规则引擎进行规则匹配，直到调用halt方法才结束规则引擎
+				System.out.println("-------------");
+				kieSession.fireUntilHalt();
+
+			}
+		}).start();
+
 		int ruleFiredCount = kieSession.fireAllRules();
 		System.out.println("触发了" + ruleFiredCount + "条规则");
 		if (result.isPostCodeResult()) {
 			System.out.println("规则校验通过");
 		}
 		System.out.println("LIST" + list.toString());
+		Thread.sleep(50000);
 		kieSession.delete(f);
 		kieSession.delete(f1);
 		// 这里添加过滤器
