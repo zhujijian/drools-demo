@@ -49,19 +49,17 @@ public class TestController {
 		new Thread(new Runnable() {
 			public void run() {
 				//启动规则引擎进行规则匹配，直到调用halt方法才结束规则引擎
-				System.out.println("-------------");
 				kieSession.fireUntilHalt();
-
 			}
 		}).start();
-
-		int ruleFiredCount = kieSession.fireAllRules();
-		System.out.println("触发了" + ruleFiredCount + "条规则");
+//		int ruleFiredCount = kieSession.fireAllRules();
+		Thread.sleep(40000);
+//		System.out.println("触发了" + ruleFiredCount + "条规则");
 		if (result.isPostCodeResult()) {
-			System.out.println("规则校验通过");
+			System.out.println("----规则校验通过");
 		}
 		System.out.println("LIST" + list.toString());
-		Thread.sleep(50000);
+
 		kieSession.delete(f);
 		kieSession.delete(f1);
 		// 这里添加过滤器

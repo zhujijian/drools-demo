@@ -13,7 +13,7 @@ function String hello1(String name) {
 
 rule "myrules.drl-1"
 lock-on-active
- timer (5s 2s)
+ timer (1s 2s)
     when
         address : Address(postcode != null, postcode matches "([0-9]{5})")
         checkResult : AddressCheckResult();
@@ -22,6 +22,12 @@ lock-on-active
          myGlobalList.add( "myrules.drl-1");
         System.out.println("规则中打印日志：校验通过!");
         System.out.println(hello("myrules.drl-1"));
+
+       // 如果满足某个条件，使用 halt 终止计时器
+        if (/* 某些条件 */ true) {
+            System.out.println("Terminating timer.");
+            drools.halt(); // 终止计时器并抛出异常
+        }
 end
 
 rule "2017myrules.drl-2"
