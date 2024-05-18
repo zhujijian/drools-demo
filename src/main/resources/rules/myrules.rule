@@ -1,0 +1,18 @@
+package rules
+
+import com.my.model.Address;
+import com.my.model.AddressCheckResult;
+
+rule "myrules1"
+    when
+         eval(true);
+    then
+        System.out.println(hello("myrules1.rule"));
+end
+
+rule "2017myrules2"
+    when
+        eval(true);
+    then
+        System.out.println(hello("2017myrules2.rule"));
+end
