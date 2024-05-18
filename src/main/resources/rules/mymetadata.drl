@@ -9,6 +9,9 @@ import java.util.Date
 
 global java.util.List myGlobalList;
 
+//元数据 @author( Bob ) 定义了这个类的作者是BOb @dateOfCreation( 01-Feb-2009 ) 定义了创建时间
+//@key 定义name作为构造函数的字段，@maxLength( 30 ) 定义了这个字段的最大长度是30
+
 declare PersonMeta
     @author( Bob )
     @dateOfCreation( 01-Feb-2009 )
@@ -23,8 +26,10 @@ lock-on-active
     when
            checkResult : AddressCheckResult();
     then
+
     	// rule类可以在rule中使用
         PersonMeta personMeta = new PersonMeta();
+        System.out.println(hello2(personMeta.getName()));
         personMeta.setName("TOMANDJERRYJFIEFIOJOAJEIFJEIOJFOIEFJOEJOJFOEJFIEJFIFJOIEJFOIEJOIJFOEJ");
         System.out.println(hello2(personMeta.getName()));
         
