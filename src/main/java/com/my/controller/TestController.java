@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.my.model.Address;
 import com.my.model.AddressCheckResult;
 import com.my.myfilter.AddressFilter;
-
+/**
+ * 语法查考文档：
+ * https://www.cnblogs.com/prpl/p/7906431.html
+ * https://blog.csdn.net/dac55300424/article/details/12950701
+ * */
 @RequestMapping("/test")
 @Controller
 public class TestController {
@@ -26,6 +30,7 @@ public class TestController {
 	
 	@Resource
 	private KieBase kieBase;
+
 
 	@ResponseBody
 	@RequestMapping("/address")
